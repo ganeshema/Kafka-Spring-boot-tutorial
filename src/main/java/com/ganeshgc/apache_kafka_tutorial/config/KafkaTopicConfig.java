@@ -15,4 +15,9 @@ public class KafkaTopicConfig {
                 .replicas(3)
                 .build();
     }
+    @Bean
+    public NewTopic kafkaTestJsonTopic() {
+        return TopicBuilder.name("test-kafka-json-1")
+                .build();
+    }
 }
