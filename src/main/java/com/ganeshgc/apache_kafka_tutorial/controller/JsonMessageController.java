@@ -1,0 +1,22 @@
+package com.ganeshgc.apache_kafka_tutorial.controller;
+
+import com.ganeshgc.apache_kafka_tutorial.kafka.JsonKafkaProducer;
+import com.ganeshgc.apache_kafka_tutorial.payload.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/kafka")
+public class JsonMessageController {
+    @Autowired
+    private JsonKafkaProducer jsonKafkaProducer;
+    @PostMapping("publish")
+    public ResponseEntity<String> publishMessage(@RequestBody User data) {
+        jsonKafkaProducer.sendMessage(data);
+        return ResponseEntity.ok("Message published to the specific topics");
+    }
+}
